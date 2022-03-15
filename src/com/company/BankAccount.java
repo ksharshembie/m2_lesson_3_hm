@@ -7,10 +7,6 @@ public class BankAccount {
         return amount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
     public void deposit(double sum) {
         System.out.println("\nДепозит на счет " + sum);
         amount += sum;
@@ -22,9 +18,13 @@ public class BankAccount {
             System.out.println("\nCнимаемая сумма " + sum);
             amount -= sum;
             System.out.println("Остаток на счете " + amount);
-        } else {
-            throw new LimitException("\nЗапрашиваемая сумма " + (double) sum + " на снятие больше, " +
+        } else if(amount < sum) {
+            throw new LimitException("\nЗапрашиваемая сумма на снятие больше, " +
                     "\nчем остаток денег на счете.\nСнимаемая сумма ", amount);
+        }
+        if  (amount == sum){
+            amount-= sum;
+            System.out.println("Остаток на счете " + amount);
         }
     }
 }

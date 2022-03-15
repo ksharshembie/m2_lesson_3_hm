@@ -11,8 +11,11 @@ public class Main {
                 account.withDraw(withDraw);
             } catch (LimitException e) {
                 e.getMessage();
-                account.setAmount(account.getAmount() - e.getRemainingAmount());
-                System.out.println("Остаток на счете " + account.getAmount());
+                try {
+                    account.withDraw((int) e.getRemainingAmount());
+                }catch (LimitException e1){
+                    e1.getMessage();
+                }
             }
         }
     }
